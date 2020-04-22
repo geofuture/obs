@@ -6,7 +6,10 @@
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text>
-        <p class="overline">Para agregar capas externas, <br> incluye los siguentes datos</p>
+        <p class="overline">
+          Para agregar capas externas, <br />
+          incluye los siguentes datos
+        </p>
         <v-form>
           <v-text-field
             prepend-icon="mdi-cast-connected"
@@ -19,7 +22,9 @@
             label="Capa"
             v-model="iLayer"
           ></v-text-field>
-          <p class="overline">Capa específica dentro del servicio de mapas web</p>
+          <p class="overline">
+            Capa específica dentro del servicio de mapas web
+          </p>
           <v-text-field
             prepend-icon="mdi-identifier"
             label="Nombre de la Capa"
@@ -35,18 +40,20 @@
           <v-divider></v-divider>
           <v-card-actions>
             <v-btn
-              class="white--text" 
+              class="white--text"
               color="blue-grey darken-3"
               @click="switchWmsDialogOff"
-            >Cancelar</v-btn>
+              >Cancelar</v-btn
+            >
             <v-spacer></v-spacer>
             <v-btn
-              class="white--text" 
+              class="white--text"
               color="grey darken-3"
               @click="switchWmsDialogOff"
               @click.prevent="addWMS"
               to="/"
-            >Agregar</v-btn>
+              >Agregar</v-btn
+            >
           </v-card-actions>
         </v-form>
       </v-card-text>
@@ -55,7 +62,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex"
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "add-wms-card",
@@ -65,7 +72,7 @@ export default {
       iLayer: "",
       iName: "",
       iAttribution: ""
-    }
+    };
   },
   computed: {
     ...mapState(["wmsDialog"])
@@ -73,14 +80,14 @@ export default {
   methods: {
     ...mapMutations(["switchWmsDialogOff"]),
     addWMS() {
-      let url = this.iUrl
-      let layer = this.iLayer
-      let name = this.iName
-      let attr = this.iAttribution
+      let url = this.iUrl;
+      let layer = this.iLayer;
+      let name = this.iName;
+      let attr = this.iAttribution;
       this.$store
-        .dispatch("addWMS", {url, layer, name, attr})
-        .catch(err => (err))
+        .dispatch("addWMS", { url, layer, name, attr })
+        .catch(err => err);
     }
   }
-}
+};
 </script>

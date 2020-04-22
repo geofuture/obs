@@ -5,9 +5,9 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import VueTour from "vue-tour";
 import VueLayers from "vuelayers";
-import "vuelayers/lib/style.css"; 
+import "vuelayers/lib/style.css";
 
-require ("vue-tour/dist/vue-tour.css");
+require("vue-tour/dist/vue-tour.css");
 
 Vue.use(VueLayers, {
   dataProjection: "EPSG:4326"

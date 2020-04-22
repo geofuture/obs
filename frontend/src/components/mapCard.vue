@@ -1,17 +1,13 @@
 <template>
   <v-card width="99%" class="mx-auto mt-2">
     <!--cargar mapa-->
-    <vl-map 
+    <vl-map
       :load-tiles-while-animating="true"
       :load-tiles-while-interacting="true"
       data-projection="EPSG:4326"
       style="height: 500px"
     >
-      <vl-view
-        :zoom.sync="zoom"
-        :center.sync="center"
-        :rotation="rotation"
-      >
+      <vl-view :zoom.sync="zoom" :center.sync="center" :rotation="rotation">
       </vl-view>
       <!--agregar punto boton-->
       <v-fab-transition>
@@ -26,12 +22,12 @@
           left
           @click="editMode = 1"
         >
-        <v-tooltip top>
-          <template v-slot:activator="{ on }">
-            <v-icon id="v-step-3" v-on="on">mdi-map-marker</v-icon>
-          </template>
-          <span>Agregar Punto</span>
-        </v-tooltip>
+          <v-tooltip top>
+            <template v-slot:activator="{ on }">
+              <v-icon id="v-step-3" v-on="on">mdi-map-marker</v-icon>
+            </template>
+            <span>Agregar Punto</span>
+          </v-tooltip>
         </v-btn>
         <v-btn
           v-else
@@ -48,7 +44,10 @@
         </v-btn>
       </v-fab-transition>
       <!--popup-->
-      <vl-interaction-select :features.sync="selectedFeatures" v-if="drawType == null">
+      <vl-interaction-select
+        :features.sync="selectedFeatures"
+        v-if="drawType == null"
+      >
         <template>
           <vl-overlay
             class="feature-popup"
@@ -63,7 +62,10 @@
               <v-card width="250" max-height="300">
                 <v-card-title class="p-0">
                   <h1 class="overline"><strong>Punto: </strong>{{ f.id }}</h1>
-                  <h1 class="overline"><strong>Coordenadas: </strong>{{ popup.position.toString() }}</h1>
+                  <h1 class="overline">
+                    <strong>Coordenadas: </strong
+                    >{{ popup.position.toString() }}
+                  </h1>
                 </v-card-title>
                 <v-divider></v-divider>
                 <v-card-text v-scroll:#scroll-target="onScroll">
@@ -73,28 +75,35 @@
                     style="max-height: 100px"
                     class="overflow-y-auto"
                   >
-                    <p 
-                      v-for="(prop, index) in f.properties" 
+                    <p
+                      v-for="(prop, index) in f.properties"
                       :key="index"
                       class="overline p-0"
-                    ><strong>{{index}}: </strong> {{ prop }}</p>
+                    >
+                      <strong>{{ index }}: </strong> {{ prop }}
+                    </p>
                   </v-container>
                   <v-container v-else>
-                    <p
-                      class="overline"
-                    ><strong>Este es un punto nuevo!</strong> <br> Agrega propiedades con el botón +</p>
+                    <p class="overline">
+                      <strong>Este es un punto nuevo!</strong> <br />
+                      Agrega propiedades con el botón +
+                    </p>
                   </v-container>
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions class="p-0">
                   <v-tooltip bottom>
                     <template v-slot:activator="{ on }">
-                      <v-icon  
-                        fab large dark color="blue-grey darken-3"
+                      <v-icon
+                        fab
+                        large
+                        dark
+                        color="blue-grey darken-3"
                         v-on="on"
                         @click="switchDialogOn(selectedFeatures)"
                       >
-                      mdi-plus-circle</v-icon>
+                        mdi-plus-circle</v-icon
+                      >
                     </template>
                     <span>Editar</span>
                   </v-tooltip>
@@ -151,9 +160,9 @@
           :features.sync="drawnFeatures"
         ></vl-source-vector>
       </vl-layer-vector>
-      <vl-interaction-draw 
-        v-if="editMode == 1" 
-        source="draw-target" 
+      <vl-interaction-draw
+        v-if="editMode == 1"
+        source="draw-target"
         type="point"
       ></vl-interaction-draw>
     </vl-map>
@@ -161,15 +170,15 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex"
-import { findPointOnSurface } from "vuelayers/lib/ol-ext"
+import { mapState, mapMutations } from "vuex";
+import { findPointOnSurface } from "vuelayers/lib/ol-ext";
 
 export default {
   name: "map-card",
-  data () {
+  data() {
     return {
-      zoom: 12,
-      center: [-74.10211342434744, 4.639915543569856],
+      zoom: 9,
+      center: [-43.575472, -19.743579 ],
       rotation: 0,
       geolocPosition: undefined,
       offsetTop: 0,
@@ -184,31 +193,41 @@ export default {
       matrixSet: "EPSG:4326",
       format: "image/png",
       styleName: "default"
-    }
+    };
   },
   methods: {
-    pointOnSurface: findPointOnSurface, onUpdatePosition (coordinate) {
-      this.deviceCoordinate = coordinate
+    pointOnSurface: findPointOnSurface,
+    onUpdatePosition(coordinate) {
+      this.deviceCoordinate = coordinate;
     },
-    onScroll (e) {
-      this.offsetTop = e.target.scrollTop
+    onScroll(e) {
+      this.offsetTop = e.target.scrollTop;
     },
     captFeature(f) {
-      this.$emit('insert:feature', f)
+      this.$emit("insert:feature", f);
     },
     ...mapMutations(["switchDialogOn"])
   },
   computed: {
-    ...mapState(["selectedLayers", "editableLayer", "formObject", "wmsVisible", "wmsUrl", "wmsLayer", "wmsName", "wmsAttributions"])
+    ...mapState([
+      "selectedLayers",
+      "editableLayer",
+      "formObject",
+      "wmsVisible",
+      "wmsUrl",
+      "wmsLayer",
+      "wmsName",
+      "wmsAttributions"
+    ])
   },
   mounted() {
-    this.wmsUrl
+    this.wmsUrl;
   }
-}
+};
 </script>
 
 <style>
-  #create .v-btn--floating {
-    position: relative;
-  }
+#create .v-btn--floating {
+  position: relative;
+}
 </style>

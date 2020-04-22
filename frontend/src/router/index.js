@@ -40,7 +40,7 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
     meta: { requiresAuth: true }
   },
-  
+
   {
     path: "/question",
     name: "question",

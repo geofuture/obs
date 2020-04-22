@@ -1,75 +1,72 @@
 <template>
-  <v-tour name="vueTour" 
-    :steps="steps"
-    class="caption"
-    :options="myOptions">
+  <v-tour name="vueTour" :steps="steps" class="caption" :options="myOptions">
   </v-tour>
 </template>
 
 <script>
-
 export default {
   name: "vue-tour",
   data() {
     return {
-      myOptions:{
+      myOptions: {
         labels: {
-          buttonSkip: 'Salir',
-          buttonPrevious: 'Anterior',
-          buttonNext: 'Siguiente',
-          buttonStop: 'Terminar'
+          buttonSkip: "Salir",
+          buttonPrevious: "Anterior",
+          buttonNext: "Siguiente",
+          buttonStop: "Terminar"
         },
-        highlight:true
+        highlight: true
       },
       steps: [
         {
-        target: "#v-step-0", // We're using document.querySelector() under the hood
-        content: `Inicie <strong>Tour</strong> para conocer el panel de navegación del aplicativo o consulte la <a href="/about" rel="noopener">Guía de usuario</a> disponible en la sección de ayuda`
+          target: "#v-step-0", // We're using document.querySelector() under the hood
+          content: `Inicie <strong>Tour</strong> para conocer el panel de navegación del aplicativo o consulte la <a href="/about" rel="noopener">Guía de usuario</a> disponible en la sección de ayuda`
         },
         {
-        target: ".v-step-1",
-        content:
-        "Acceda para ver la lista de proyectos, agregar capas al mapa y consultar la información georreferenciada",
+          target: ".v-step-1",
+          content:
+            "Acceda para ver la lista de proyectos, agregar capas al mapa y consultar la información georreferenciada",
           params: {
-          placement: "top"
+            placement: "top"
           }
         },
         {
           target: "#v-step-2",
           content: `Cree proyectos y configure los campos para registrar la información que desea capturar`,
           params: {
-          placement: "top"
+            placement: "top"
           }
         },
         {
           target: "#v-step-3",
-          content: "Active la opción para agregar un nuevo punto al proyecto seleccionado",
+          content:
+            "Active la opción para agregar un nuevo punto al proyecto seleccionado",
           params: {
-          placement: "right",
-          highlight: false
-          }       
+            placement: "right",
+            highlight: false
+          }
         },
         {
           target: "#v-step-4",
           content: "Descargue proyectos en formato geojson",
           params: {
-          placement: "top"
+            placement: "top"
           }
         },
         {
           target: "#v-step-5",
           content: "Agregue capas WMS al mapa",
           params: {
-          placement: "top"
-        }
+            placement: "top"
+          }
         },
         {
           target: "#v-step-6",
           content: `Consulte la <a href="/about" rel="noopener">Guía de usuario</a> disponible en la sección de Ayuda`,
           params: {
-          highlight: false
-          } 
-        },
+            highlight: false
+          }
+        }
       ],
       callbacks: {
         onPreviousStep: this.myCustomPreviousStepCallback,
@@ -86,11 +83,11 @@ export default {
     };
   },
   methods: {
-    nextStep () {
-      this.$tours['vue-tour'].nextStep()
+    nextStep() {
+      this.$tours["vue-tour"].nextStep();
     },
-    showLastStep () {
-      this.$tours['vue-tour'].currentStep = this.steps.length - 1
+    showLastStep() {
+      this.$tours["vue-tour"].currentStep = this.steps.length - 1;
     }
     /*myCustomPreviousStepCallback (currentStep) {
       console.log('[Vue Tour] A custom previousStep callback has been called on step ' + (currentStep + 1))
@@ -102,7 +99,7 @@ export default {
       }
     }*/
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -113,7 +110,7 @@ export default {
 .v-step {
   background: #50596c;
   opacity: 0.9;
-  }
+}
 
 .v-application a {
   color: #bcdcfc;

@@ -10,11 +10,10 @@
 import loginCard from "@/components/loginCard.vue";
 import alert from "@/components/alert.vue";
 
-
 export default {
   name: "login",
   components: {
-    loginCard, 
+    loginCard,
     alert
   }
 };
